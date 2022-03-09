@@ -24,3 +24,9 @@ Update .env Data
 ``` bash
 php artisan migrate:refresh --seed
 ```
+
+[ico-version]: https://img.shields.io/packagist/v/bewarhizirvan/laravel-basic-accountant.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/bewarhizirvan/laravel-basic-accountant.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/bewarhizirvan/laravel-basic-accountant
+[link-downloads]: https://packagist.org/packages/bewarhizirvan/laravel-basic-accountant
