@@ -128,6 +128,7 @@ class CustomerController extends BaseController
         $model->email = $request->input('email');
         $model->currency_id = $request->input('currency_id');
         $model->active = $request->has('active');
+        $model->user_id = $this->user->getAuthIdentifier();
         $model->save();
 
         return redirect()->route('customer.index');

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $address
  * @property mixed $currency
  * @property bool|mixed $active
+ * @property mixed $user_id
  * @method static find(int $id)
  */
 class Wallet extends Model

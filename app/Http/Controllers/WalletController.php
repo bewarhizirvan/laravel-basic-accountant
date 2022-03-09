@@ -123,6 +123,7 @@ class WalletController extends BaseController
         $model->address = $request->input('address');
         $model->currency_id = $request->input('currency_id');
         $model->active = $request->has('active');
+        $model->user_id = $this->user->getAuthIdentifier();
         $model->save();
 
         return redirect()->route('wallet.index');

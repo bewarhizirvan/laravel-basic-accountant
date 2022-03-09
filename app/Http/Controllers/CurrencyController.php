@@ -89,6 +89,7 @@ class CurrencyController extends BaseController
         $model->code = $request->input('code');
         $model->rate = $request->input('rate');
         $model->active = $request->has('active');
+        $model->user_id = $this->user->getAuthIdentifier();
         $model->save();
 
         return redirect()->route('currency.index');

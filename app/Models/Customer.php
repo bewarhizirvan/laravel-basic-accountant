@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $email
  * @property mixed $currency_id
  * @property bool|mixed $active
+ * @property mixed $user_id
  * @method static select(string $string, string $string1)
  */
 class Customer extends Model

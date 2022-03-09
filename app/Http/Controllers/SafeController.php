@@ -181,6 +181,7 @@ $("#amount").keyup(function (e) {
         $model->currency_id = $request->input('currency_id');
         $model->wallet_id = $request->input('wallet_id') != '' ? $request->input('wallet_id') : 0;
         $model->customer_id = $request->input('customer_id') != '' ? $request->input('customer_id') : 0;
+        $model->user_id = $this->user->getAuthIdentifier();
         $model->save();
 
         return redirect()->route('home');
@@ -305,6 +306,7 @@ $("#amount_out").keyup(function (e) {
         $model_out->currency_id = $request->input('currency_id_out');
         $model_out->wallet_id = $request->input('wallet_id') != '' ? $request->input('wallet_id') : 0;
         $model_out->customer_id = $request->input('customer_id') != '' ? $request->input('customer_id') : 0;
+        $model_out->user_id = $this->user->getAuthIdentifier();
         $model_out->save();
 
         $model_in = new Safe;
@@ -317,6 +319,7 @@ $("#amount_out").keyup(function (e) {
         $model_in->currency_id = $request->input('currency_id_in');
         $model_in->wallet_id = $request->input('wallet_id') != '' ? $request->input('wallet_id') : 0;
         $model_in->customer_id = $request->input('customer_id') != '' ? $request->input('customer_id') : 0;
+        $model_in->user_id = $this->user->getAuthIdentifier();
         $model_in->save();
 
         return redirect()->route('home');
@@ -444,6 +447,7 @@ $("#amount").keyup(function (e) {
         $model_out->currency_id = $request->input('currency_id');
         $model_out->wallet_id = $request->input('wallet_id_from') != '' ? $request->input('wallet_id_from') : 0;
         $model_out->customer_id = $request->input('customer_id_from') != '' ? $request->input('customer_id_from') : 0;
+        $model_out->user_id = $this->user->getAuthIdentifier();
         $model_out->save();
 
         $model_in = new Safe;
@@ -456,6 +460,7 @@ $("#amount").keyup(function (e) {
         $model_in->currency_id = $request->input('currency_id');
         $model_in->wallet_id = $request->input('wallet_id_to') != '' ? $request->input('wallet_id_to') : 0;
         $model_in->customer_id = $request->input('customer_id_to') != '' ? $request->input('customer_id_to') : 0;
+        $model_in->user_id = $this->user->getAuthIdentifier();
         $model_in->save();
 
         return redirect()->route('home');
