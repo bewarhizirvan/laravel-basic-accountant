@@ -39,6 +39,7 @@ class CurrencyController extends BaseController
         });
         $grid->addColumn('user.name', 'AddedBy');
         $grid->addColumn('created_at', 'Added DateTime');
+        $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
         $grid->addActionButton('edit', 'Edit', 'currency.edit');
         //$grid->addActionButton('remove', 'Remove', 'currency.destroy');

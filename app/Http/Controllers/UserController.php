@@ -57,6 +57,8 @@ class UserController extends Controller
         $grid->addColumn('id', 'ID');
         $grid->addColumn('name', 'Name', true);
         $grid->addColumn('email', 'Email', true);
+        $grid->addColumn('created_at', 'DateTime');
+        $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
         $grid->addActionButton('account', 'Show', 'user.show');
         $grid->addActionButton('edit', 'Edit', 'user.edit');

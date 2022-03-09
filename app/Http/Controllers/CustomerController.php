@@ -71,6 +71,7 @@ class CustomerController extends BaseController
         });
         $grid->addColumn('user.name', 'AddedBy');
         $grid->addColumn('created_at', 'Added DateTime');
+        $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
         $grid->addActionButton('account', 'Show', 'customer.show');
         $grid->addActionButton('edit', 'Edit', 'customer.edit');

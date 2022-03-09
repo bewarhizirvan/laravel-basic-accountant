@@ -28,7 +28,7 @@ class SafeController extends BaseController
             'footerCounter' => false
         ];
         $grid = new LaravelGrid($parameters);
-        $grid->orderBy('id', 'desc');
+        $grid->orderBy('created_at', 'desc');
         $grid->addColumn('full_name', 'Full Name', true);
         $grid->addColumn('description', 'Description', true);
         $grid->addColumn('address', 'Address', true);
@@ -55,6 +55,7 @@ class SafeController extends BaseController
         });
         $grid->addColumn('user.name', 'AddedBy');
         $grid->addColumn('created_at', 'DateTime');
+        $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
         $grid->addActionButton('edit', 'Edit', 'home');
 

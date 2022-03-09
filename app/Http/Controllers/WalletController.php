@@ -70,6 +70,7 @@ class WalletController extends BaseController
         });
         $grid->addColumn('user.name', 'AddedBy');
         $grid->addColumn('created_at', 'Added DateTime');
+        $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
         $grid->addActionButton('account', 'Show', 'wallet.show');
         $grid->addActionButton('edit', 'Edit', 'wallet.edit');
