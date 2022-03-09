@@ -13,4 +13,11 @@ Via Git
 git clone https://github.com/bewarhizirvan/laravel-basic-accountant.git
 cd laravel-basic-accountant
 composer update
+cp .env.example .env
+php artisan key:generate
+```
+
+Update .env Data
+``` bash
+php artisan migrate:refresh --seed
 ```
