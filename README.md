@@ -1,4 +1,5 @@
 # laravel-basic-accountant
+[![Latest Version on Packagist][ico-version]][link-packagist]
 
 
 ## Installing
