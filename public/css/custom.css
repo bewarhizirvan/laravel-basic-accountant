@@ -1,0 +1,60 @@
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+.form-control-label, .form-control{
+    color: black;
+}
+.form-control:focus{
+    color: black;
+}
+/* Buttons */
+.column-action button
+{
+    border-radius:3px 3px 3px 3px;
+    padding-top:1px;
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:1px;
+    font-size:12px;
+}
+.form-checkbox1
+{
+    height: auto;
+}
+.form-custom-control
+{
+    font-size1: 12px;
+    max-height1:29px;
+    padding: 5px;
+    margin-top: -15px;
+}
+.flex-column .my-3
+{
+    margin-top: 0.3rem !important;
+    margin-right: 1.5rem;
+    margin-bottom: 0.3rem !important;
+    margin-left: 1.5rem;
+}
+.tt-dropdown-menu { text-align: left; }
+.ui-autocomplete-input { text-align: left; }
+.custom-control-label::before { right: -1.25rem; }
+.custom-control-label::after { right: -1.25rem; }
+.custom-control-label { right: 1.5rem; }
+
+/* Details Div */
+.thumbs { display: block; position: relative;}
+
+/** detail panel **/
+.details-pane { display: none; color: #414141; background: #f1f1f1; border: 1px solid #a9a9a9; position: absolute; top: -10px; right: 5px; z-index: 99999; width: 350px; padding: 4px 4px;
+    text-align: center; -webkit-box-shadow: 1px 3px 3px rgba(0,0,0,0.4); -moz-box-shadow: 1px 3px 3px rgba(0,0,0,0.4); box-shadow: 1px 3px 3px rgba(0,0,0,0.4);}
+
+@media print {
+    @page
+    {
+        size: auto; /* auto is the initial value */
+        margin: 10mm 8mm 10mm 8mm; /* this affects the margin in the printer settings */
+    }
+
+}
