@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $customer_id
  * @property bool|mixed $active
  * @property mixed $user_id
+ * @property mixed $created_at
  */
 class Safe extends Model
 {

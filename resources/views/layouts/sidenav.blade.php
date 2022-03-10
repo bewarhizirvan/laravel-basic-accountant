@@ -68,7 +68,7 @@
                     </a>
                 </li>
 
-                @if(\Auth::check() && \Auth::user()->getAuthIdentifier() == 1)
+                @can('perm', new App\Policies\Perm('list_users'))
                     <li class="nav-item">
                         <a class="nav-link " href="{{ route('user.index') }}">
 
@@ -80,7 +80,7 @@
                             <span class="nav-link-text ms-1">Users</span>
                         </a>
                     </li>
-                @endif
+                @endcan
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

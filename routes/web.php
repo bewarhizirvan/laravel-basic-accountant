@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
             ->name('safe.transfer.create');
         Route::post('transfer/store', [\App\Http\Controllers\SafeController::class, 'storeTransfer'])
             ->name('safe.transfer.store');
+        Route::get('{safe}/edit', [\App\Http\Controllers\SafeController::class, 'edit'])->name('safe.edit');
+        Route::match(['put','patch'],'{safe}', [\App\Http\Controllers\SafeController::class, 'update'])->name('safe.update');
+        Route::delete('{safe}', [\App\Http\Controllers\SafeController::class, 'destroy'])->name('safe.destroy');
 
     });
     Route::prefix('ajax')->group(function() {

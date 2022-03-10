@@ -46,4 +46,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profiles()
+    {
+        return $this->belongsToMany('App\Models\Profile')->withTimestamps();
+    }
+
+    public function assignProfile($profile)
+    {
+        return $this->profiles()->sync($profile);
+    }
+
+    public function permissions()
+    {
+        return $this->profiles->map->permissions->flatten()->pluck('name')->unique();
+    }
+
+    public function hasPerm($perm, bool $noSuper = false)
+    {
+        $perms = $this->profiles->map->permissions->flatten()->pluck('name')->unique();
+        if($noSuper)
+            return $perms->contains($perm);
+        else
+            return $perms->contains($perm) || $this->getAuthIdentifier() == config('perm.superAdmin');
+    }
+
 }

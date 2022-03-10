@@ -6,6 +6,7 @@ use App\Helpers\FormatHelper;
 use App\Models\Currency;
 use App\Models\Safe;
 use App\Models\Wallet;
+use App\Policies\CheckPerm;
 use BewarHizirvan\LaravelForm\LaravelForm;
 use BewarHizirvan\LaravelGrid\LaravelGrid;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class SafeController extends BaseController
         if(isset($filterArray['user_id'])) $model->where('user_id', $filterArray['user_id']);
         $parameters = [
             'label' => $buttons,
-            'checkClass' => null,
+            'checkClass' => new CheckPerm,
             'paginate' => 50,
             'provider' => $model,
             'footerCounter' => false
@@ -57,8 +58,8 @@ class SafeController extends BaseController
         $grid->addColumn('created_at', 'DateTime');
         $grid->addColumn('updated_at', 'Updated');
         $grid->addActionColumn('id');
-        $grid->addActionButton('edit', 'Edit', 'home');
-
+        $grid->addActionButton('edit', 'Edit', 'safe.edit');
+        $grid->addActionButton('remove', 'Remove', 'safe.destroy', [['name' => 'perm', 'value' => 'destroy_file']]);
         return $grid->render();
     }
 
@@ -128,7 +129,7 @@ class SafeController extends BaseController
         {
             $form->addSelect('wallet_id', $wallets, 1, [], 'Wallet');
         }
-
+        $form->addText('created_at', date('Y-m-d\TH:i:s', strtotime('now')), ['type' => 'datetime-local'], 'DateTime', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
         $form = $form->render();
 
         $script = '<link href="'.asset('css/jquery-ui.min.css').'" rel="stylesheet"/>
@@ -183,6 +184,7 @@ $("#amount").keyup(function (e) {
         $model->wallet_id = $request->input('wallet_id') != '' ? $request->input('wallet_id') : 0;
         $model->customer_id = $request->input('customer_id') != '' ? $request->input('customer_id') : 0;
         $model->user_id = $this->user->getAuthIdentifier();
+        $model->created_at = $request->input('created_at');
         $model->save();
 
         return redirect()->route('home');
@@ -465,5 +467,85 @@ $("#amount").keyup(function (e) {
         $model_in->save();
 
         return redirect()->route('home');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $title = "Edit Safe Record";
+        $parameters = [
+            'title' => $title,
+            'route' => ['safe.update', $id],
+            'method' => 'put',
+            'class' => 'form-horizontal'
+        ];
+        $currencies = Currency::where('active', 1)->pluck('code', 'id');
+        $wallets = Wallet::where('active', 1)->pluck('name', 'id');
+        $model = Safe::find($id);
+        $form = new LaravelForm($parameters);
+        $form->addText('full_name', $model->full_name, ['disabled' => '1'], 'Customer / Full Name', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
+        $form->addText('description', $model->description, [], 'Description', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
+        $form->addText('address', $model->address, [], 'Address', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
+        $form->addText('amount', $model->amount, ['required' => 1], 'Amount', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
+        $form->addSelect('currency_id', $currencies, $model->currency_id, [], 'Currency');
+        $form->addSelect('wallet_id', $wallets, $model->wallet_id, ['disabled' => '1'], 'Wallet');
+        $form->addCheckbox('active', '1', $model->active, ['class' => 'form-checkbox form-check-input'], 'Active', ['class' => 'col-md-3 col-form-label'], ['class'=>"row"]);
+        $form->addText('created_at', date('Y-m-d\TH:i:s', strtotime($model->created_at)), ['type' => 'datetime-local'], 'DateTime', ['class' => 'col-md-3 col-form-label'], ['class' => "row"]);
+        $form = $form->render();
+
+        $script = '<script type="application/javascript">
+$("#amount").keyup(function (e) {
+    var $this = $(this);
+    var num = $this.val().replace(/,/gi, "");
+    var num2 = num.replace(/\d(?=(?:\d{3})+$)/g, \'$&,\');
+    $this.val(num2);
+
+})
+</script>';
+        return response()->view('body', compact('form', 'script'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function update(Request $request, $id)
+    {
+        Validator::make($request->all(), [
+            'amount' => ['required'],
+        ])->validate();
+
+        $model = Safe::find($id);
+        $model->address = $request->input('address');
+        $model->description = $request->input('description');
+        $model->amount = floatval(Str::replace(",","",$request->input('amount')));
+        $model->currency_id = $request->input('currency_id');
+        $model->active = $request->has('active');
+        $model->created_at = $request->input('created_at');
+        $model->save();
+
+        return redirect()->route('home');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return int
+     */
+    public function destroy($id)
+    {
+        Safe::destroy($id);
+
+        return 1;
     }
 }
