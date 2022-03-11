@@ -8,7 +8,7 @@
 Via Composer
 
 ``` bash
-composer create-project bewarhizirvan/laravel-basic-accountant
+composer require bewarhizirvan/laravel-basic-accountant
 ```
 
 Via Git

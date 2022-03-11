@@ -25,8 +25,8 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet"/>
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.0') }}" rel="stylesheet"/>
-    <link href="{{ asset('css/custom.css?v=2.0.11') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/argon-dashboard.css?v=2.0.0') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/custom.css?v=2.0.20') }}" rel="stylesheet"/>
 
 </head>
 

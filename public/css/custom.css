@@ -37,6 +37,13 @@
     margin-bottom: 0.3rem !important;
     margin-left: 1.5rem;
 }
+th.column-description,
+td.column-description
+{
+    max-width: 20vw !important;
+    white-space: pre-line;
+    word-wrap: break-word !important;
+}
 .tt-dropdown-menu { text-align: left; }
 .ui-autocomplete-input { text-align: left; }
 .custom-control-label::before { right: -1.25rem; }

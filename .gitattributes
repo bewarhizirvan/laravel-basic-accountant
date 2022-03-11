@@ -1,12 +1,10 @@
 * text=auto
 
 *.blade.php diff=html
-*.css linguist-detectable=false
+*.css diff=css
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
-*.js linguist-detectable=false
-*.scss linguist-detectable=false
 
 /.github export-ignore
 CHANGELOG.md export-ignore
